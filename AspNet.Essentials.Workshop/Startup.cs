@@ -38,6 +38,8 @@ namespace AspNet.Essentials.Workshop
                 client.BaseAddress = options?.Value?.BaseUrl;
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
             });
+
+            services.AddSingleton<IBloodAlcoholCalculator, BloodAlcoholCalculator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

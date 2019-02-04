@@ -12,6 +12,9 @@ namespace AspNet.Essentials.Workshop.Services
         const double OuncesToGramsMultiple = 340.194;
         const double MaleConstant = 0.68;
         const double FemaleConstant = 0.55;
+        const double AlcoholOverTimeDeteriorationConstant = .015;
+
+        const int BacPrecision = 4;
 
         public double Calculate(
             int weightInPounds,
@@ -32,9 +35,9 @@ namespace AspNet.Essentials.Workshop.Services
             var weightWithSexConstant = bodyWeightInGrams * (sex == Sex.Male ? MaleConstant : FemaleConstant);
             var rawNumber = totalAlcoholInGrams / weightWithSexConstant;
             var bacPercentage = rawNumber * 100;
-            var result = bacPercentage - (hoursOfDrinking * .015);
+            var result = bacPercentage - (hoursOfDrinking * AlcoholOverTimeDeteriorationConstant);
 
-            return Math.Round(result, 4);
+            return Math.Round(result, BacPrecision);
         }
     }
 }
