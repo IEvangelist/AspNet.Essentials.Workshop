@@ -56,9 +56,9 @@ namespace AspNet.Essentials.Workshop
                 app.UseHsts();
             }
 
-            lifetime.ApplicationStarted.Register(o => OnStarted(o as ILogger<Startup>), logger);
-            lifetime.ApplicationStopping.Register(o => OnStopping(o as ILogger<Startup>), logger);
-            lifetime.ApplicationStopped.Register(o => OnStopped(o as ILogger<Startup>), logger);
+            lifetime.ApplicationStarted.Register(o => OnStarted(o as ILogger), logger);
+            lifetime.ApplicationStopping.Register(o => OnStopping(o as ILogger), logger);
+            lifetime.ApplicationStopped.Register(o => OnStopped(o as ILogger), logger);
 
             app.UseHttpsRedirection()
                .UseSwagger()
@@ -67,19 +67,13 @@ namespace AspNet.Essentials.Workshop
             app.UseMvc();
         }
 
-        void OnStarted(ILogger<Startup> logger)
-        {
-            // Perform post-startup activities here
-        }
+        static void OnStarted(ILogger logger)
+            => logger.LogInformation("The application has started... post-startup logic here.");
 
-        void OnStopping(ILogger<Startup> logger)
-        {
-            // Perform on-stopping activities here
-        }
+        static void OnStopping(ILogger logger)
+            => logger.LogInformation("The application has stopping... stopping logic here.");
 
-        void OnStopped(ILogger<Startup> logger)
-        {
-            // Perform post-stopped activities here
-        }
+        static void OnStopped(ILogger logger)
+            => logger.LogInformation("The application has stopped... post-stopped logic here.");
     }
 }
