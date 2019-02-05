@@ -1,6 +1,5 @@
 ﻿using AspNet.Essentials.Workshop.Abstractions;
 using AspNet.Essentials.Workshop.Enums;
-using AspNet.Essentials.Workshop.Models;
 using System;
 using System.Linq;
 
@@ -20,7 +19,7 @@ namespace AspNet.Essentials.Workshop.Services
             int weightInPounds,
             double hoursOfDrinking,
             Sex sex,
-            params Beer[] beers)
+            params IBeer[] beers)
         {
             if (beers is null || beers.Length == 0)
             {
@@ -37,7 +36,7 @@ namespace AspNet.Essentials.Workshop.Services
             var bacPercentage = rawNumber * 100;
             var result = bacPercentage - (hoursOfDrinking * AlcoholOverTimeDeteriorationConstant);
 
-            return Math.Round(result, BacPrecision);
+            return Math.Max(0, Math.Round(result, BacPrecision));
         }
     }
 }

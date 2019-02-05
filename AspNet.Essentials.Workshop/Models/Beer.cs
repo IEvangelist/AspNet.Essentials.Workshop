@@ -1,6 +1,8 @@
-﻿namespace AspNet.Essentials.Workshop.Models
+﻿using AspNet.Essentials.Workshop.Abstractions;
+
+namespace AspNet.Essentials.Workshop.Models
 {
-    public class Beer
+    public class Beer : IBeer
     {
         public string Id { get; set; }
         public string Name { get; set; }

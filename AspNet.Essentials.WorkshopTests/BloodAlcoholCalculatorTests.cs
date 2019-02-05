@@ -17,19 +17,17 @@ namespace AspNet.Essentials.WorkshopTests
             => _sut = new BloodAlcoholCalculator();
 
         [Fact]
-        public void CalculateBloodAlcoholCorrectlyCalculates()
+        public void CalculateBloodAlcoholIsNonZero()
         {
-            var beers = new Beer[]
+            var beers = new Beer[] 
             {
-                new Beer { Abv = 7.2 },
-                new Beer { Abv = 9.6 },
-                new Beer { Abv = 12.7 }
+                new Beer { Abv = 5 }
             };
 
-            var expected = 0.0996;
-            var actual = _sut.Calculate(225, 3, Sex.Male, beers);
+            var expected = 0d;
+            var actual = _sut.Calculate(225, 5, Sex.Male, beers);
 
-            Assert.Equal(Math.Round(expected, 4), actual);
+            Assert.Equal(expected, actual);
         }
 
         [

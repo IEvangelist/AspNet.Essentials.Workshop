@@ -9,6 +9,6 @@ namespace AspNet.Essentials.Workshop.Abstractions
             int weightInPounds,
             double hoursOfDrinking,
             Sex sex,
-            params Beer[] beers);
+            params IBeer[] beers);
     }
 }
