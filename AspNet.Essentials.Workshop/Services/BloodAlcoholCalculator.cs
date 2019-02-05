@@ -26,10 +26,28 @@ namespace AspNet.Essentials.Workshop.Services
                 return 0;
             }
 
+            return Calculate(
+                weightInPounds,
+                hoursOfDrinking,
+                sex,
+                beers.Select(beer => beer.Abv).ToArray());
+        }
+
+        public double Calculate(
+            int weightInPounds,
+            double hoursOfDrinking,
+            Sex sex,
+            params double[] abvs)
+        {
+            if (abvs is null || abvs.Length == 0)
+            {
+                return 0;
+            }
+
             // Calculation borrowed from:
             // https://www.wikihow.com/Calculate-Blood-Alcohol-Content-(Widmark-Formula)
 
-            var totalAlcoholInGrams = beers.Sum(beer => OuncesToGramsMultiple * (beer.Abv / 100));
+            var totalAlcoholInGrams = abvs.Sum(abv => OuncesToGramsMultiple * (abv / 100));
             var bodyWeightInGrams = weightInPounds * PoundsToGramsMultiple;
             var weightWithSexConstant = bodyWeightInGrams * (sex == Sex.Male ? MaleConstant : FemaleConstant);
             var rawNumber = totalAlcoholInGrams / weightWithSexConstant;

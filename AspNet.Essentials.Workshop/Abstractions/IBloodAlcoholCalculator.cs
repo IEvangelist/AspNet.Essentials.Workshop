@@ -10,5 +10,11 @@ namespace AspNet.Essentials.Workshop.Abstractions
             double hoursOfDrinking,
             Sex sex,
             params IBeer[] beers);
+
+        double Calculate(
+            int weightInPounds,
+            double hoursOfDrinking,
+            Sex sex,
+            params double[] abvs);
     }
 }
